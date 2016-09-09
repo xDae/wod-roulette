@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WodButton = (props) => (
+const WodButton = props => (
 	<button className="wod-button" onClick={props.setRandomWod}>{props.text}</button>
 );
 

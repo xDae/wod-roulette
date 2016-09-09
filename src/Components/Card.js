@@ -24,7 +24,7 @@ const Card = ({title, workout_title, image, score_type, workout, ratingButton}) 
 );
 
 Card.propTypes = {
-  title: React.PropTypes.string.isRequired,
+	title: React.PropTypes.string.isRequired,
 	workout_title: React.PropTypes.string,
 	image: React.PropTypes.string,
 	score_type: React.PropTypes.string,
