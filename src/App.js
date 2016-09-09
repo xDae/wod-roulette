@@ -23,16 +23,7 @@ class App extends Component {
 			isLoading: true,
       wods: [],
 			totalWods: 0,
-			selectedWOD: 34,
-			selectedWod: {
-				date: '',
-				title: '',
-				workout_title: '',
-				thumbnail: '',
-				popularity: '',
-				score_types: '',
-				workout: []
-			}
+			selectedWOD: 0
     };
   };
 
@@ -44,24 +35,31 @@ class App extends Component {
 	      this.setState({
 					wods,
 					totalWods: wods.length,
-					isLoading: false
+					isLoading: false,
+					selectedWOD: this.getRamdomNumber(wods.length)
 				});
-				this.setRandomWod();
 	    }
 	  });
 	};
 
+	getRamdomNumber(max) {
+		return Math.floor((Math.random() * max));
+	};
+
 	setRandomWod() {
 		let totalWods = this.state.totalWods;
-		let randomNumber = Math.floor((Math.random() * totalWods));
-		let selectedWod = this.state.wods[randomNumber];
+		let selectedWOD = this.getRamdomNumber(totalWods);
 
-		this.setState({selectedWod});
+		this.setState({selectedWOD});
 	};
+
+	getData(data) {
+		return this.state.wods[this.state.selectedWOD][data];
+	}
 
   render() {
 		if (this.state.isLoading) {
-			return <Loading />;
+			return <Loading text="loading" />;
 		}
 
 		return (
@@ -69,12 +67,12 @@ class App extends Component {
 				<Logo text="Wod Roulette" />
 
 				<Card
-					title={this.state.selectedWod.title}
-					workout_title={this.state.selectedWod.workout_title}
-					image={this.state.selectedWod.thumbnail}
-					popularity={this.state.selectedWod.popularity}
-					score_type={this.state.selectedWod.score_types}
-					workout={this.state.selectedWod.workout}
+					title={this.getData('title')}
+					workout_title={this.getData('workout_title')}
+					image={this.getData('thumbnail')}
+					popularity={this.getData('popularity')}
+					score_type={this.getData('score_types')}
+					workout={this.getData('workout')}
 				/>
 
 				<WodButton text="Give me Other WOD" setRandomWod={this.setRandomWod.bind(this)} />

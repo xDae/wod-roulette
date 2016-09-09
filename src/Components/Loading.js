@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Loading = () => (
+const Loading = props => (
 	<div className="loading animated fadeIn">
 		<div>
 			<div className="c1"></div>
@@ -8,12 +8,16 @@ const Loading = () => (
 			<div className="c3"></div>
 			<div className="c4"></div>
 		</div>
-		<span>loading</span>
+		<span>{props.text}</span>
 	</div>
 );
 
-// Loading.propTypes = {
-// 	: React.PropTypes.
-// };
+Loading.propTypes = {
+	text: React.PropTypes.string
+};
+
+Loading.defaultProps = {
+	text: 'loading'
+};
 
 export default Loading;
