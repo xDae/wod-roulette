@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import Rebase from 're-base';
+import base from './firebaseConfig';
 
+// Components
 import Logo from './Components/Logo';
 import Card from './Components/Card';
 import Loading from './Components/Loading';
 import WodButton from './Components/WodButton';
+import RatingButton from './Components/RatingButton';
 
 import './App.css';
-
-var base = Rebase.createClass({
-		apiKey: "AIzaSyDoizxbDrmXFj8k89BMGH5Mw_l4jk3F0fM",
-	 	authDomain: "project-8681004705566154074.firebaseapp.com",
-	 	databaseURL: "https://project-8681004705566154074.firebaseio.com",
-	 	storageBucket: "project-8681004705566154074.appspot.com",
-});
 
 class App extends Component {
 	constructor(props) {
@@ -23,20 +18,21 @@ class App extends Component {
 			isLoading: true,
       wods: [],
 			totalWods: 0,
-			selectedWOD: 0
+			selectedWOD: 0,
+			votedWods: []
     };
   };
 
 	componentDidMount() {
-	  base.fetch(`wods`, {
+		base.bindToState('wods', {
 	    context: this,
+	    state: 'wods',
 	    asArray: true,
-			then(wods) {
+			then() {
 	      this.setState({
-					wods,
-					totalWods: wods.length,
 					isLoading: false,
-					selectedWOD: this.getRamdomNumber(wods.length)
+					totalWods: this.state.wods.length,
+					selectedWOD: this.getRamdomNumber(this.state.wods.length)
 				});
 	    }
 	  });
@@ -53,29 +49,62 @@ class App extends Component {
 		this.setState({selectedWOD});
 	};
 
+	updateVotedWdos(wod) {
+		let votedWods = this.state.votedWods.concat(wod);
+		this.setState({votedWods});
+	};
+
+	updateRating() {
+		let wodPosition = this.state.selectedWOD;
+		let wodKey = this.state.wods[wodPosition].key;
+		let rating = this.state.wods[wodPosition].popularity;
+
+		var that = this;
+
+		if(!this.state.votedWods.some(elem => elem === wodKey)) {
+			base.update(`wods/${wodKey}`, {
+				data: {popularity: rating + 1},
+				then() {
+					console.log(wodKey);
+					that.updateVotedWdos(wodKey);
+				}
+			});
+		}
+	};
+
 	getData(data) {
 		return this.state.wods[this.state.selectedWOD][data];
-	}
+	};
 
-  render() {
-		if (this.state.isLoading) {
+	renderContent(isLoading) {
+		if (isLoading) {
 			return <Loading text="loading" />;
 		}
 
 		return (
-			<div className="App">
-				<Logo text="Wod Roulette" />
-
+			<div>
 				<Card
+					wodKey={this.getData('key')}
 					title={this.getData('title')}
 					workout_title={this.getData('workout_title')}
 					image={this.getData('thumbnail')}
 					popularity={this.getData('popularity')}
 					score_type={this.getData('score_types')}
 					workout={this.getData('workout')}
+					updateVotedWdos={this.updateVotedWdos.this}
+					ratingButton={<RatingButton updateRating={this.updateRating.bind(this)} rating={this.getData('popularity')} />}
 				/>
-
 				<WodButton text="Give me Other WOD" setRandomWod={this.setRandomWod.bind(this)} />
+			</div>
+		)
+	}
+
+  render() {
+		return (
+			<div className="App">
+				<Logo text="Wod Roulette" />
+
+				{this.renderContent(this.state.isLoading)}
 			</div>
 		)
   };

@@ -45,6 +45,7 @@ body {
 }
 .post-module .thumbnail .date {
   position: absolute;
+  cursor: pointer;
   top: 20px;
   right: 20px;
   display: flex;
@@ -61,6 +62,8 @@ body {
   font-weight: 700;
   /*text-align: center;*/
   box-sizing: border-box;
+  border: 0;
+  outline: none;
 }
 
 .post-module .thumbnail .date .day {
@@ -384,4 +387,21 @@ body {
   padding: 10px;
   text-align: left;
   box-shadow: 0px 1px 35px 0px rgba(0, 0, 0, 0.3);
+}
+
+.popularity,
+.date i {
+  transition: all 0.3s linear 0s;
+}
+
+.date:hover .popularity {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+  display: none;
+}
+
+.date:hover i {
+  font-size: 30px;
 }
