@@ -1,4 +1,4 @@
-Simple Crossfit workouts Roulette made with React and Firebase.
+# Simple Crossfit workouts Roulette made with React and Firebase.
 
 [![WOD ](screenshot.png "Logo Title Text 1")](http://josemiguel.org/wod-roulette/)
 
