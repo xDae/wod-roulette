@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Rebase from 're-base';
 
-import Card from './Components/Card'
+import Logo from './Components/Logo';
+import Card from './Components/Card';
 import Loading from './Components/Loading';
 import WodButton from './Components/WodButton';
 
@@ -22,6 +23,7 @@ class App extends Component {
 			isLoading: true,
       wods: [],
 			totalWods: 0,
+			selectedWOD: 34,
 			selectedWod: {
 				date: '',
 				title: '',
@@ -32,7 +34,7 @@ class App extends Component {
 				workout: []
 			}
     };
-  }
+  };
 
 	componentDidMount() {
 	  base.fetch(`wods`, {
@@ -47,7 +49,7 @@ class App extends Component {
 				this.setRandomWod();
 	    }
 	  });
-	}
+	};
 
 	setRandomWod() {
 		let totalWods = this.state.totalWods;
@@ -55,7 +57,7 @@ class App extends Component {
 		let selectedWod = this.state.wods[randomNumber];
 
 		this.setState({selectedWod});
-	}
+	};
 
   render() {
 		if (this.state.isLoading) {
@@ -64,6 +66,8 @@ class App extends Component {
 
 		return (
 			<div className="App">
+				<Logo text="Wod Roulette" />
+
 				<Card
 					title={this.state.selectedWod.title}
 					workout_title={this.state.selectedWod.workout_title}
@@ -76,7 +80,7 @@ class App extends Component {
 				<WodButton text="Give me Other WOD" setRandomWod={this.setRandomWod.bind(this)} />
 			</div>
 		)
-  }
+  };
 }
 
 export default App;
