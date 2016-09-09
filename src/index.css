@@ -47,11 +47,13 @@ body {
   position: absolute;
   top: 20px;
   right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
   background: #e74c3c;
   width: 55px;
   height: 55px;
-  padding: 12.5px 0;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   border-radius: 100%;
@@ -361,6 +363,7 @@ body {
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
+  outline: none;
 }
 
 .wod-button:hover {

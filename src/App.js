@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import Card from './Card'
-import './App.css';
-
 import Rebase from 're-base';
+
+import Card from './Components/Card'
+import Loading from './Components/Loading';
+import WodButton from './Components/WodButton';
+
+import './App.css';
 
 var base = Rebase.createClass({
 		apiKey: "AIzaSyDoizxbDrmXFj8k89BMGH5Mw_l4jk3F0fM",
@@ -19,12 +22,12 @@ class App extends Component {
 			isLoading: true,
       wods: [],
 			totalWods: 0,
-			wodShown: {
+			selectedWod: {
 				date: '',
 				title: '',
 				workout_title: '',
-				thumbnail: 'http://wodwell.com/wp-content/uploads/2014/09/crossfit-box2.jpg',
-				popularity: 0,
+				thumbnail: '',
+				popularity: '',
 				score_types: '',
 				workout: []
 			}
@@ -49,42 +52,28 @@ class App extends Component {
 	setRandomWod() {
 		let totalWods = this.state.totalWods;
 		let randomNumber = Math.floor((Math.random() * totalWods));
-		let wod = this.state.wods[randomNumber];
+		let selectedWod = this.state.wods[randomNumber];
 
-		this.setState({'wodShown': wod});
-	}
-
-	renderLoading() {
-			return (
-				<div className="loading animated fadeIn">
-					<div>
-						<div className="c1"></div>
-						<div className="c2"></div>
-						<div className="c3"></div>
-						<div className="c4"></div>
-					</div>
-					<span>loading</span>
-				</div>
-			);
+		this.setState({selectedWod});
 	}
 
   render() {
 		if (this.state.isLoading) {
-			return this.renderLoading()
+			return <Loading />;
 		}
 
 		return (
 			<div className="App">
 				<Card
-					date={this.state.wodShown.date}
-					title={this.state.wodShown.title}
-					workout_title={this.state.wodShown.workout_title}
-					image={this.state.wodShown.thumbnail}
-					popularity={this.state.wodShown.popularity}
-					score_type={this.state.wodShown.score_types}
-					workout={this.state.wodShown.workout}
+					title={this.state.selectedWod.title}
+					workout_title={this.state.selectedWod.workout_title}
+					image={this.state.selectedWod.thumbnail}
+					popularity={this.state.selectedWod.popularity}
+					score_type={this.state.selectedWod.score_types}
+					workout={this.state.selectedWod.workout}
 				/>
-				<button className="wod-button" onClick={this.setRandomWod.bind(this)}>Give me Other WOD</button>
+
+				<WodButton text="Give me Other WOD" setRandomWod={this.setRandomWod.bind(this)} />
 			</div>
 		)
   }

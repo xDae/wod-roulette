@@ -1,6 +1,6 @@
 {
   "name": "wod-roulette",
-	"homepage": " http://josemiguel.org/wod-roulette/",
+  "homepage": " http://josemiguel.org/wod-roulette/",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
