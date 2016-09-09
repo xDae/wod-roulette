@@ -77,6 +77,10 @@ class App extends Component {
 	};
 
 	renderContent(isLoading) {
+    const ratingButton = (rating) => (
+      <div><RatingButton updateRating={this.updateRating.bind(this)} rating={rating} /></div>
+    );
+
 		if (isLoading) {
 			return <Loading text="loading" />;
 		}
@@ -88,11 +92,9 @@ class App extends Component {
 					title={this.getData('title')}
 					workout_title={this.getData('workout_title')}
 					image={this.getData('thumbnail')}
-					popularity={this.getData('popularity')}
 					score_type={this.getData('score_types')}
 					workout={this.getData('workout')}
-					updateVotedWdos={this.updateVotedWdos.this}
-					ratingButton={<RatingButton updateRating={this.updateRating.bind(this)} rating={this.getData('popularity')} />}
+					ratingButton={ratingButton(this.getData('popularity'))}
 				/>
 				<WodButton text="Give me Other WOD" setRandomWod={this.setRandomWod.bind(this)} />
 			</div>

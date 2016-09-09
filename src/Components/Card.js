@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Card = ({title, workout_title, image, popularity, score_type, workout, ratingButton}) => (
+const Card = ({title, workout_title, image, score_type, workout, ratingButton}) => (
 	<div className="post-module hover animated fadeIn">
 		<div className="thumbnail">
 			{ratingButton}
@@ -27,7 +27,6 @@ Card.propTypes = {
   title: React.PropTypes.string.isRequired,
 	workout_title: React.PropTypes.string,
 	image: React.PropTypes.string,
-	popularity: React.PropTypes.number,
 	score_type: React.PropTypes.string,
 	workout: React.PropTypes.array
 };
@@ -36,7 +35,6 @@ Card.defaultProps = {
 	title: '',
 	workout_title: '',
 	image: 'http://wodwell.com/wp-content/uploads/2014/09/crossfit-box2.jpg',
-	popularity: 0,
 	score_type: '',
 	workout: [],
 };
