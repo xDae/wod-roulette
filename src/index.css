@@ -43,18 +43,18 @@ body {
   max-height: 200px;
   overflow: hidden;
 }
-.post-module .thumbnail .date {
+.post-module .date {
   position: absolute;
   cursor: pointer;
-  top: 20px;
+  top: -28px;
   right: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1;
   background: #e74c3c;
-  width: 55px;
-  height: 55px;
+  width: 56px;
+  height: 56px;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   border-radius: 100%;
@@ -66,17 +66,18 @@ body {
   outline: none;
 }
 
-.post-module .thumbnail .date .day {
+.post-module .date .day {
   font-size: 18px;
 }
 
-.post-module .thumbnail .date .month {
+.post-module .date .month {
   font-size: 12px;
   text-transform: uppercase;
 }
 
 .post-content {
 	text-align: left;
+  position: relative;
 }
 
 .post-module .thumbnail img {

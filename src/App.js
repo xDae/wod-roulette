@@ -65,14 +65,13 @@ class App extends Component {
 			base.update(`wods/${wodKey}`, {
 				data: {popularity: rating + 1},
 				then() {
-					console.log(wodKey);
 					that.updateVotedWdos(wodKey);
 				}
 			});
 		}
 	};
 
-	getData(data) {
+	getWodState(data) {
 		return this.state.wods[this.state.selectedWOD][data];
 	};
 
@@ -88,13 +87,13 @@ class App extends Component {
 		return (
 			<div>
 				<Card
-					wodKey={this.getData('key')}
-					title={this.getData('title')}
-					workout_title={this.getData('workout_title')}
-					image={this.getData('thumbnail')}
-					score_type={this.getData('score_types')}
-					workout={this.getData('workout')}
-					ratingButton={ratingButton(this.getData('popularity'))}
+					wodKey={this.getWodState('key')}
+					title={this.getWodState('title')}
+					workout_title={this.getWodState('workout_title')}
+					image={this.getWodState('thumbnail')}
+					score_type={this.getWodState('score_types')}
+					workout={this.getWodState('workout')}
+					ratingButton={ratingButton(this.getWodState('popularity'))}
 				/>
 				<WodButton text="Give me Other WOD" setRandomWod={this.setRandomWod.bind(this)} />
 			</div>

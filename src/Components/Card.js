@@ -3,11 +3,11 @@ import React from 'react';
 const Card = ({title, workout_title, image, score_type, workout, ratingButton}) => (
 	<div className="post-module hover animated fadeIn">
 		<div className="thumbnail">
-			{ratingButton}
 			<img alt={title} src={image} />
 			<div className="category">{score_type}</div>
 		</div>
 		<div className="post-content">
+			{ratingButton}
 			<h1 className="title">{title}</h1>
 			<h2 className="sub_title"><i className="fa fa-clock-o"></i> {workout_title}</h2>
 			<p className="description">
