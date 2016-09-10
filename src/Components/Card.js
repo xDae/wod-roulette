@@ -23,6 +23,14 @@ const Card = ({title, workout_title, image, score_type, workout, ratingButton}) 
 	</div>
 );
 
+Card.defaultProps = {
+	title: '',
+	workout_title: '',
+	image: 'http://wodwell.com/wp-content/uploads/2014/09/crossfit-box2.jpg',
+	score_type: '',
+	workout: [],
+};
+
 Card.propTypes = {
 	title: React.PropTypes.string.isRequired,
 	workout_title: React.PropTypes.string,
@@ -31,12 +39,5 @@ Card.propTypes = {
 	workout: React.PropTypes.array
 };
 
-Card.defaultProps = {
-	title: '',
-	workout_title: '',
-	image: 'http://wodwell.com/wp-content/uploads/2014/09/crossfit-box2.jpg',
-	score_type: '',
-	workout: [],
-};
 
 export default Card;

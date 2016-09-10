@@ -49,7 +49,7 @@ class App extends Component {
     this.setState({selectedWOD});
   };
 
-  updateVotedWdos(wod) {
+  updateVotedWods(wod) {
     let votedWods = this.state.votedWods.concat(wod);
     this.setState({votedWods});
   };
@@ -65,7 +65,7 @@ class App extends Component {
       base.update(`wods/${wodKey}`, {
         data: {popularity: rating + 1},
         then() {
-          that.updateVotedWdos(wodKey);
+          that.updateVotedWods(wodKey);
         }
       });
     }
@@ -95,7 +95,7 @@ class App extends Component {
           workout={this.getWodState('workout')}
           ratingButton={ratingButton(this.getWodState('popularity'))}
         />
-        <WodButton text="Give me Other WOD" setRandomWod={this.setRandomWod.bind(this)} />
+        <WodButton text="Give me Other WOD" handleClick={this.setRandomWod.bind(this)} />
       </div>
     )
   }
