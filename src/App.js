@@ -55,9 +55,10 @@ class App extends Component {
   };
 
   updateRating = () => {
-    let wodPosition = this.state.selectedWOD;
-    let wodKey = this.state.wods[wodPosition].key;
-    let rating = this.state.wods[wodPosition].popularity;
+    let {wods, selectedWOD} = this.state;
+
+    let wodKey = wods[selectedWOD].key;
+    let rating = wods[selectedWOD].popularity;
 
     var that = this;
 
