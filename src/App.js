@@ -42,7 +42,7 @@ class App extends Component {
     return Math.floor((Math.random() * max));
   };
 
-  setRandomWod() {
+  setRandomWod = () => {
     let totalWods = this.state.totalWods;
     let selectedWOD = this.getRamdomNumber(totalWods);
 
@@ -54,7 +54,7 @@ class App extends Component {
     this.setState({votedWods});
   };
 
-  updateRating() {
+  updateRating = () => {
     let wodPosition = this.state.selectedWOD;
     let wodKey = this.state.wods[wodPosition].key;
     let rating = this.state.wods[wodPosition].popularity;
@@ -76,8 +76,8 @@ class App extends Component {
   };
 
   renderContent(isLoading) {
-    const ratingButton = (rating) => (
-      <div><RatingButton updateRating={this.updateRating.bind(this)} rating={rating} /></div>
+    const ratingButton = rating => (
+      <div><RatingButton updateRating={this.updateRating} rating={rating} /></div>
     );
 
     if (isLoading) {
@@ -95,7 +95,7 @@ class App extends Component {
           workout={this.getWodState('workout')}
           ratingButton={ratingButton(this.getWodState('popularity'))}
         />
-        <WodButton text="Give me Other WOD" handleClick={this.setRandomWod.bind(this)} />
+        <WodButton text="Give me Other WOD" handleClick={this.setRandomWod} />
       </div>
     )
   }

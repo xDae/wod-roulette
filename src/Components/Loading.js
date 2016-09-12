@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Loading = props => (
+const Loading = ({text}) => (
 	<div className="loading animated fadeIn">
 		<div>
 			<div className="c1"></div>
@@ -8,7 +8,7 @@ const Loading = props => (
 			<div className="c3"></div>
 			<div className="c4"></div>
 		</div>
-		<span>{props.text}</span>
+		<span>{text}</span>
 	</div>
 );
 
