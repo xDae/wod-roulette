@@ -71,10 +71,6 @@ class App extends Component {
     }
   };
 
-  getWodState(data) {
-    return this.state.wods[this.state.selectedWOD][data];
-  };
-
   renderContent(isLoading) {
     const ratingButton = rating => (
       <div><RatingButton updateRating={this.updateRating} rating={rating} /></div>
@@ -84,16 +80,18 @@ class App extends Component {
       return <Loading text="loading" />;
     }
 
+    let {wods, selectedWOD} = this.state;
+
     return (
       <div>
         <Card
-          wodKey={this.getWodState('key')}
-          title={this.getWodState('title')}
-          workout_title={this.getWodState('workout_title')}
-          image={this.getWodState('thumbnail')}
-          score_type={this.getWodState('score_types')}
-          workout={this.getWodState('workout')}
-          ratingButton={ratingButton(this.getWodState('popularity'))}
+          wodKey={wods[selectedWOD].key}
+          title={wods[selectedWOD].title}
+          workout_title={wods[selectedWOD].workout_title}
+          image={wods[selectedWOD].thumbnail}
+          score_type={wods[selectedWOD].score_types}
+          workout={wods[selectedWOD].workout}
+          ratingButton={ratingButton(wods[selectedWOD].popularity)}
         />
         <WodButton text="Give me Other WOD" handleClick={this.setRandomWod} />
       </div>
